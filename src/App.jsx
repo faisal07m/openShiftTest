@@ -2,33 +2,6 @@ import { Routes, Route, Link } from 'react-router-dom';
 
 import React, { useEffect, useState } from "react";
 
-function Home() {
-  return (
-    <main style={pageStyle}>
-      <div style={cardStyle}>
-        <h1>Hello World</h1>
-        <p>Welcome to your ReactJS project.</p>
-        <Link to="/next">Go to Next Page →</Link>
-        <p>API Response:</p>
-      <strong>{message}</strong>
-      </div>
-    </main>
-  );
-}
-
-function Next() {
-  return (
-    <main style={pageStyle}>
-      <div style={cardStyle}>
-        <h1>Hello Next</h1>
-        <p>You are on /next route.</p>
-        <Link to="/">← Back Home</Link>
-
-      </div>
-    </main>
-  );
-}
-
 export default function App() {
   const [message, setMessage] = useState("");
 
@@ -38,6 +11,34 @@ export default function App() {
       .then((data) => setMessage(data.message))
       .catch((err) => console.error(err));
   }, []);
+  function Home() {
+    return (
+      <main style={pageStyle}>
+        <div style={cardStyle}>
+          <h1>Hello World</h1>
+          <p>Welcome to your ReactJS project.</p>
+          <Link to="/next">Go to Next Page →</Link>
+          <p>API Response:</p>   
+        <strong>{message}</strong>
+        </div>
+      </main>
+    );
+  }
+        
+  function Next() {
+    return (
+      <main style={pageStyle}>
+        <div style={cardStyle}>
+          <h1>Hello Next</h1>
+          <p>You are on /next route.</p>
+          <Link to="/">← Back Home</Link>
+      
+        </div>
+      </main>
+    );
+  }
+  
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />
