@@ -1,5 +1,6 @@
-import React from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
+
+import React, { useEffect, useState } from "react";
 
 function Home() {
   return (
@@ -8,6 +9,8 @@ function Home() {
         <h1>Hello World</h1>
         <p>Welcome to your ReactJS project.</p>
         <Link to="/next">Go to Next Page →</Link>
+        <p>API Response:</p>
+      <strong>{message}</strong>
       </div>
     </main>
   );
@@ -20,12 +23,21 @@ function Next() {
         <h1>Hello Next</h1>
         <p>You are on /next route.</p>
         <Link to="/">← Back Home</Link>
+
       </div>
     </main>
   );
 }
 
 export default function App() {
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    fetch("/api/test")
+      .then((res) => res.json())
+      .then((data) => setMessage(data.message))
+      .catch((err) => console.error(err));
+  }, []);
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -50,3 +62,5 @@ const cardStyle = {
   boxShadow: '0 10px 30px rgba(0,0,0,0.08)',
   textAlign: 'center'
 };
+
+
